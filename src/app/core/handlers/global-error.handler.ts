@@ -1,10 +1,9 @@
-import { ErrorHandler, Injectable } from "@angular/core";
+import { ErrorHandler, Injectable } from '@angular/core';
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class GlobalError implements ErrorHandler {
-     handleError(error: unknown): void {
-     console.error('A global error occurred:', error);
+  handleError(error: unknown): void {
+    console.error('A global error occurred:', error);
   }
 }
