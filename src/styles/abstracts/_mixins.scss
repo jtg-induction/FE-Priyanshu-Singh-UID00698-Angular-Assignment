@@ -1,0 +1,21 @@
+@use 'breakpoints' as bp;
+
+@mixin respond($screen){
+    @media (max-width: map-get(bp.$breakpoints,$screen)){
+        @content;
+    }
+}
+
+@mixin flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin truncate{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+//will add more 

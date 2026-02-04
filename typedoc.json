@@ -1,0 +1,8 @@
+{
+  "entryPoints": ["src/main.ts"],
+  "out": "docs",
+  "plugin": ["typedoc-plugin-markdown"], //to convert the files from the html website to markdown 
+  "exclude": ["**/*+(spec|test).ts"],
+  "name": "Blog app",
+  "includeVersion": true,
+}
