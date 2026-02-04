@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "lint:scss": "stylelint \"src/**/*.scss\"",
+    "lint:scss": "stylelint \"src/**/*.scss\" --fix",
     "docs": "typedoc",
     "prepare": "husky"
   },
