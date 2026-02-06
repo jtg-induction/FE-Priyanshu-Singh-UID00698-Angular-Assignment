@@ -1,3 +1,7 @@
-@function rem($px){
-    @return ($px / 16) * 1rem;
+///
+///Converts pixels values to rem units
+/// @param {Number} $px - Pixel value to convert
+///@returns {Number} Converted value in rem
+@function pxToRem($px) {
+  @return ($px / 16) * 1rem;
 }
