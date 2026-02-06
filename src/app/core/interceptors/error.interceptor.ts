@@ -13,6 +13,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       const apiError = error.error as ApiError;
+
       let message = 'Something went wrong. Please try again';
       if (apiError?.code) {
         message = ERROR_MESSAGES[apiError.code] ?? apiError.message ?? message;
@@ -23,7 +24,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         notificationService.error(message);
 
         if (!currentUrl.includes('/login')) {
-          //will add
+          router.navigate(['/login']);
         }
       }
       notificationService.error(message);

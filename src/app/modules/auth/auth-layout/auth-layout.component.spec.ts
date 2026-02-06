@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './auth-layout.component';
 
 describe('AuthLayoutComponent', () => {
@@ -9,6 +10,7 @@ describe('AuthLayoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuthLayoutComponent],
+      imports: [RouterModule.forRoot([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AuthLayoutComponent);

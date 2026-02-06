@@ -12,5 +12,6 @@ export const ERROR_MESSAGES: Record<string, string> = {
 export const VALIDATION_ERROR: Record<string, string> = {
   required: 'This Field is required',
   email: 'Please enter a valid email',
-  weakpassword: 'Password must be at least 8 characters and contain at least 2 numbers',
+  weakPassword: 'Password must be at least 8 characters and contain at least 2 numbers',
+  passwordMismatch: 'Passwords do not match',
 };
