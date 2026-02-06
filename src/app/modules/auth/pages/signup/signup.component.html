@@ -1,0 +1,19 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <h2>Sign Up</h2>
+
+  <div>
+    <input type="text" placeholder="Username" formControlName="username" />
+  </div>
+
+  <div>
+    <input type="email" placeholder="Email" formControlName="email" />
+  </div>
+
+  <div>
+    <input type="password" placeholder="Password" formControlName="password" />
+  </div>
+
+  <button type="submit" [disabled]="isSubmitting">
+    {{ isSubmitting ? 'Creating account...' : 'Sign Up' }}
+  </button>
+</form>

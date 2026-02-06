@@ -1,0 +1,6 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <mat-form-field> </mat-form-field>
+  <button type="submit" [disabled]="isSubmitting">
+    {{ isSubmitting ? 'Logging in...' : 'Login' }}
+  </button>
+</form>
