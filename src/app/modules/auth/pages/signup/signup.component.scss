@@ -9,7 +9,7 @@
   &__card {
     width: 100%;
     max-width: 420px;
-    background: #ffffff;
+    background: #fff;
     border-radius: 12px;
     padding: 2rem;
     box-shadow: 0 10px 30px rgb(0 0 0 / 8%);
@@ -78,7 +78,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .auth-page {
     padding: 1rem;
 
