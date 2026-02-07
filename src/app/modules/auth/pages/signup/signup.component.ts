@@ -45,7 +45,7 @@ export class SignupComponent {
   }
 
   onSubmit(): void {
-    this.signupForm.updateValueAndValidity({ onlySelf: false, emitEvent: true });
+    // this.signupForm.updateValueAndValidity({ onlySelf: false, emitEvent: true });
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
       return;

@@ -57,6 +57,7 @@ export class AuthService {
   private setSession(user: User, token: string): void {
     localStorage.setItem(this.ACCESS_TOKEN_KEY, token);
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+    this.userSubject.next(user);
   }
 
   private restoreAuthState(): void {

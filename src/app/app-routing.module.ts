@@ -10,6 +10,7 @@ const routes: Routes = [
   },
   { path: '**', component: NotFoundComponent },
 ];
+
 @NgModule({
   declarations: [],
   imports: [CommonModule, RouterModule.forRoot(routes)],
