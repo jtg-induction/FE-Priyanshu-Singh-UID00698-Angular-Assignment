@@ -1,9 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
-import { getValidationErrorMessage } from '@shared/validators/password.validator';
 
 @Component({
   selector: 'app-login',
@@ -23,12 +22,12 @@ export class LoginComponent {
   constructor() {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required]],
     });
   }
 
-  getErrorMessage(fieldName: string): string {
-    return getValidationErrorMessage(this.loginForm.get(fieldName));
+  getCtrl(name: string): FormControl {
+    return this.loginForm.get(name) as FormControl;
   }
 
   onSubmit(): void {

@@ -1,5 +1,4 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { VALIDATION_ERROR } from '@shared/constants/error.constants';
 
 export function passwordValidator(control: AbstractControl): ValidationErrors | null {
   const value: string = control.value;
@@ -27,18 +26,5 @@ export const confirmPasswordValidator = (group: AbstractControl): ValidationErro
     return { passwordMismatch: true };
   }
 
-  if (confirmCtrl.errors?.['passwordMismatch']) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { passwordMismatch, ...rest } = confirmCtrl.errors;
-    confirmCtrl.setErrors(Object.keys(rest).length ? rest : null);
-  }
-
   return null;
-};
-
-export const getValidationErrorMessage = (control: AbstractControl | null): string => {
-  if (!control || !control.errors) return '';
-  const errorKey = Object.keys(control.errors)[0];
-  const errorMessages = VALIDATION_ERROR[errorKey] || 'Invalid field';
-  return errorMessages;
 };

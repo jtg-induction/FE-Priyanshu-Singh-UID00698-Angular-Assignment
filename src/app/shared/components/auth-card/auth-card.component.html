@@ -1,0 +1,19 @@
+<div class="auth-page">
+  <div class="auth-page__card">
+    <div class="auth-page__header">
+      <h2>{{ title }}</h2>
+      <p>{{ subtitle }}</p>
+    </div>
+
+    <div class="auth-form">
+      <ng-content></ng-content>
+    </div>
+
+    <div class="auth-page__footer">
+      <p>
+        {{ footerText }}
+        <a [routerLink]="footerLink">{{ footerLinkText }}</a>
+      </p>
+    </div>
+  </div>
+</div>

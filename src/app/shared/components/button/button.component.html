@@ -1,0 +1,21 @@
+<button
+  mat-raised-button
+  [color]="color"
+  [type]="type"
+  class="button"
+  [disabled]="disabled || loading"
+  (click)="onClick()"
+>
+  @if (!loading) {
+    <span>
+      @if (icon) {
+        <mat-icon class="btn-icon">{{ icon }}</mat-icon>
+      }
+      {{ label }}
+    </span>
+  }
+
+  @if (loading) {
+    <mat-spinner [diameter]="spinnerSize"> </mat-spinner>
+  }
+</button>

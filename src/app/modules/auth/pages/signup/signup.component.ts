@@ -1,14 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignUpRequest } from '@core/models/auth.model';
 import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
-import {
-  confirmPasswordValidator,
-  getValidationErrorMessage,
-  passwordValidator,
-} from '@shared/validators/password.validator';
+import { confirmPasswordValidator, passwordValidator } from '@shared/validators/password.validator';
 
 @Component({
   selector: 'app-signup',
@@ -40,12 +36,11 @@ export class SignupComponent {
     );
   }
 
-  getErrorMessage(fieldName: string): string {
-    return getValidationErrorMessage(this.signupForm.get(fieldName));
+  getCtrl(name: string): FormControl {
+    return this.signupForm.get(name) as FormControl;
   }
 
   onSubmit(): void {
-    // this.signupForm.updateValueAndValidity({ onlySelf: false, emitEvent: true });
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
       return;
@@ -64,7 +59,7 @@ export class SignupComponent {
         this.isLoading = false;
         console.log('Signup successful:', response);
         this.notificationService.success('Account created successfully!');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       },
       error: (error) => {
         this.isLoading = false;

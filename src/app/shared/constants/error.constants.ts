@@ -8,10 +8,3 @@ export const ERROR_MESSAGES: Record<string, string> = {
   AUTH_TOKEN_INVALID: 'Please login again !',
   SERVER_ERROR: 'Unexpected server error !',
 };
-
-export const VALIDATION_ERROR: Record<string, string> = {
-  required: 'This Field is required',
-  email: 'Please enter a valid email',
-  weakPassword: 'Password must be at least 8 characters and contain at least 2 numbers',
-  passwordMismatch: 'Passwords do not match',
-};
