@@ -6,7 +6,7 @@
   }
 
   @if (type === 'password') {
-    <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+    <button mat-icon-button matSuffix type="button" (click)="togglePassword()">
       <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
     </button>
   }
