@@ -10,6 +10,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    min-width: 80vw;
     padding: px_to_rem(12);
   }
 
@@ -41,6 +42,10 @@
       align-items: stretch;
       margin-bottom: px_to_rem(16);
       gap: px_to_rem(0);
+    }
+
+    &__content {
+      min-width: 100vw;
     }
   }
 }

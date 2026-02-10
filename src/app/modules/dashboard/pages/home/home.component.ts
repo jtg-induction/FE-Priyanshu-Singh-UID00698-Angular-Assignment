@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,8 @@ import { ArticleService } from '@modules/dashboard/services/article.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 import { HttpParams } from '@angular/common/http';
+
+import { MatSidenav } from '@angular/material/sidenav';
 
 import { Article } from '@core/models/article.model';
 import { DashBoardFilter, sortByType, sortOrderType } from '@core/models/dashboard-filter.model';
@@ -21,6 +23,7 @@ import { NotificationService } from '@core/services/notification.service';
 })
 export class HomeComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA];
+  @ViewChild('filterDrawer') filterDrawer!: MatSidenav;
 
   articles: Article[] = [];
   selectedTags: string[] = [];
@@ -49,6 +52,7 @@ export class HomeComponent implements OnInit {
         queryParams: {
           search: search || '',
           page: 0,
+          pageSize: 6,
         },
         queryParamsHandling: 'merge',
       });
@@ -72,6 +76,7 @@ export class HomeComponent implements OnInit {
       relativeTo: this.route,
       queryParams: {
         page: e.pageIndex + 1,
+        pageSize: e.pageSize,
       },
       queryParamsHandling: 'merge',
     });
@@ -102,6 +107,7 @@ export class HomeComponent implements OnInit {
       },
       queryParamsHandling: 'merge',
     });
+    this.filterDrawer.close();
   }
 
   clearFilters(): void {

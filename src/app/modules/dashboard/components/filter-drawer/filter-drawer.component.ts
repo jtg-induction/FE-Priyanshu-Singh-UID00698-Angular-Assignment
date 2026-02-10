@@ -11,6 +11,7 @@ import { DashBoardFilter, sortByType, sortOrderType } from '@core/models/dashboa
 })
 export class FilterDrawerComponent {
   readonly separatorKeysCodes = [ENTER, COMMA];
+
   @Input() tags: string[] = [];
   @Input() sortBy: sortByType = 'createdAt';
   @Input() sortOrder: sortOrderType = 'DESC';

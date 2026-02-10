@@ -7,6 +7,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(px_to_rem(350), 1fr));
     gap: px_to_rem(16);
+    place-content: start start;
   }
 
   &__loader {
