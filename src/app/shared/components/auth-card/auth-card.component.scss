@@ -1,7 +1,7 @@
 @use 'abstracts' as *;
 
 .auth-page {
-  min-height: 94.5vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,6 +64,7 @@
 @media (width <= 600px) {
   .auth-page {
     padding: px-to-rem(16);
+    height: 100vh;
 
     &__card {
       padding: px-to-rem(24);

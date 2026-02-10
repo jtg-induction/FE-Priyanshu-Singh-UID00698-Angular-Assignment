@@ -1,12 +1,15 @@
-.button {
-  height: 48px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
+@use 'abstracts' as *;
 
-.btn-icon {
-  font-size: 18px;
+.button {
+  cursor: pointer;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: px_to_rem(8);
+  }
+
+  &__icon {
+    font-size: px_to_rem(12);
+  }
 }

@@ -8,6 +8,8 @@ import { ArticleService } from '@modules/dashboard/services/article.service';
 
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
+import { HttpParams } from '@angular/common/http';
+
 import { Article } from '@core/models/article.model';
 import { DashBoardFilter, sortByType, sortOrderType } from '@core/models/dashboard-filter.model';
 import { NotificationService } from '@core/services/notification.service';
@@ -34,13 +36,6 @@ export class HomeComponent implements OnInit {
 
   pageEvent: PageEvent | undefined;
 
-  handlePageEvent(e: PageEvent) {
-    this.pageEvent = e;
-    this.length = e.length;
-    this.pageIndex = e.pageIndex;
-    this.loadArticles();
-  }
-
   private articleService = inject(ArticleService);
   private snackbar = inject(NotificationService);
   private router = inject(Router);
@@ -55,18 +50,30 @@ export class HomeComponent implements OnInit {
           search: search || '',
           page: 0,
         },
+        queryParamsHandling: 'merge',
       });
     });
 
     this.route.queryParams.subscribe((params) => {
       console.log('URL PARAMS', params);
-      this.pageIndex = +params['page'] || 0;
+      const urlPage = +params['page'] || 1;
+      this.pageIndex = Math.max(0, urlPage - 1);
       this.pageSize = +params['pageSize'] || 6;
       this.currentSearch = params['search'] || '';
       this.selectedTags = params['tags'] ? params['tags'].split(',') : [];
       this.sortBy = params['sortBy'] || 'createdAt';
       this.sortOrder = params['sortOrder'] || 'DESC';
       this.loadArticles();
+    });
+  }
+
+  handlePageEvent(e: PageEvent) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page: e.pageIndex + 1,
+      },
+      queryParamsHandling: 'merge',
     });
   }
 
@@ -84,35 +91,62 @@ export class HomeComponent implements OnInit {
     this.selectedTags = this.selectedTags.filter((t) => t !== tag);
   }
 
-  //  this.router.navigate([], {
-  //     relativeTo: this.route,
-  //     queryParams: {
-  //       page: this.pageIndex + 1,
-  //       pageSize: this.pageSize,
-  //       search: filters.search,
-  //       // tags: filters.tags,
-  //       sortBy: this.sortBy,
-  //       sortOrder: this.sortOrder,
-  //     },
-  //   });
+  applyFilters(filter: DashBoardFilter): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page: 1,
+        tags: filter.tags?.length ? this.selectedTags.join(',') : undefined,
+        sortBy: filter.sortBy,
+        sortOrder: filter.sortOrder,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  clearFilters(): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page: 1,
+        search: undefined,
+        tags: undefined,
+        sortBy: 'createdAt',
+        sortOrder: 'DESC',
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  private buildParams(): HttpParams {
+    let params = new HttpParams()
+      .set('page', (this.pageIndex + 1).toString())
+      .set('pageSize', this.pageSize.toString());
+
+    if (this.currentSearch) {
+      params = params.set('search', this.currentSearch);
+    }
+
+    if (this.selectedTags.length) {
+      params = params.set('tags', this.selectedTags.join(','));
+    }
+
+    params = params.set('sortBy', this.sortBy).set('sortOrder', this.sortOrder);
+    return params;
+  }
 
   loadArticles(): void {
     this.isArticleLoading = true;
-    const filters: DashBoardFilter = {
-      search: this.currentSearch || undefined,
-      tags: this.selectedTags.length ? this.selectedTags : undefined,
-      sortBy: this.sortBy,
-      sortOrder: this.sortOrder,
-    };
 
-    this.articleService.getArticles(filters, this.pageIndex, this.pageSize).subscribe({
+    const param = this.buildParams();
+
+    this.articleService.getArticles(param).subscribe({
       next: (response) => {
         console.log(response);
         this.articles = response.data.data;
         this.pageSize = response.data.pageSize;
         this.length = response.data.totalItems;
         this.isArticleLoading = false;
-        this.snackbar.success('Articles fetched successfully');
       },
       error: (err) => {
         console.log(err);

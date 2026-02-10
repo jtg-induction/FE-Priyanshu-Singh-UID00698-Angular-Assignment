@@ -17,9 +17,16 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { ArticleService } from './services/article.service';
+import { FilterDrawerComponent } from './components/filter-drawer/filter-drawer.component';
+import { ArticleListComponent } from './components/article-list/article-list.component';
 
 @NgModule({
-  declarations: [DashboardLayoutComponent, HomeComponent],
+  declarations: [
+    DashboardLayoutComponent,
+    HomeComponent,
+    FilterDrawerComponent,
+    ArticleListComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

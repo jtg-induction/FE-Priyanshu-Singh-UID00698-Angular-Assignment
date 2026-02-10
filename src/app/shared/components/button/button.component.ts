@@ -6,15 +6,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
-  @Input() label = '';
+  @Input() label? = '';
   @Input() icon?: string;
   @Input() type: 'button' | 'submit' = 'button';
   @Input() color: 'primary' | 'basic' = 'primary';
   @Input() loading = false;
   @Input() disabled = false;
-  @Input() spinnerSize = 20;
+  @Input() spinnerSize = 24;
   @Output() clicked = new EventEmitter<void>();
   onClick(): void {
-    if (!this.loading) this.clicked.emit();
+    this.clicked.emit();
   }
 }

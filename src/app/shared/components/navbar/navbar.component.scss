@@ -1,36 +1,38 @@
+@use 'abstracts' as *;
+
 .navbar {
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 px_to_rem(16);
   justify-content: space-between;
 
   &__left {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: px_to_8rem();
     cursor: pointer;
   }
 
   &__logo {
-    height: 48px;
-    width: 48px;
+    height: px_to_rem(48);
+    width: px_to_rem(48);
     object-fit: contain;
   }
 
   &__title {
-    font-size: 18px;
+    font-size: px_to_rem(48);
     font-weight: 600;
   }
 
   &__right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: px_to_rem(12);
   }
 
   &__avatar {
-    height: 32px;
-    width: 32px;
+    height: px_to_rem(32);
+    width: px_to_rem(32);
     border-radius: 50%;
     object-fit: cover;
   }
