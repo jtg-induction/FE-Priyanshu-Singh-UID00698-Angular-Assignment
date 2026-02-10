@@ -1,6 +1,6 @@
 {
   "name": "angular-rampup",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "ng": "ng",
@@ -14,9 +14,15 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.ts": "ng lint --fix",
-    "*.html": "ng lint --fix",
-    "*.scss": "stylelint --fix"
+    "*.ts": [
+      "eslint --fix"
+    ],
+    "*.html": [
+      "prettier --fix"
+    ],
+    "*.scss": [
+      "stylelint --fix"
+    ]
   },
   "private": true,
   "dependencies": {
@@ -42,6 +48,7 @@
     "angular-eslint": "21.0.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.5",
     "husky": "^9.1.7",
     "init": "^0.1.2",
@@ -55,7 +62,6 @@
     "prettier": "^3.8.1",
     "stylelint": "^17.1.1",
     "stylelint-config-standard-scss": "^17.0.0",
-    "typedoc": "^0.28.16",
     "typescript": "~5.4.2",
     "typescript-eslint": "8.46.4"
   }

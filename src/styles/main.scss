@@ -1,7 +1,2 @@
-@use 'abstracts/variables';
-@use 'abstracts/mixins';
-@use 'abstracts/breakpoints';
-@use 'abstracts/functions';
-
-@use 'base/reset';
-@use 'base/typography';
+@use 'abstracts';
+@use 'base';
