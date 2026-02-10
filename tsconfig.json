@@ -13,14 +13,6 @@
       "@environments/*": ["environments/*"]
     },
     "noImplicitOverride": true,
-    "baseUrl": "src",
-    "paths": {
-      "@core/*": ["app/core/*"],
-      "@shared/*": ["app/shared/*"],
-      "@modules/*": ["app/modules/*"],
-      "@assets/*": ["assets/*"],
-      "@environments/*": ["environments/*"]
-    },
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,

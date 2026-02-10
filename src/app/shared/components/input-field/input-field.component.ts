@@ -21,6 +21,15 @@ export class InputFieldComponent {
 
   hidePassword = true;
 
+  togglePassword(): void {
+    this.hidePassword = !this.hidePassword;
+  }
+
+  get inputType(): string {
+    if (this.type !== 'password') return this.type;
+    return this.hidePassword ? 'password' : 'text';
+  }
+
   get showError(): boolean {
     return this.control.invalid && (this.control.touched || this.control.dirty);
   }

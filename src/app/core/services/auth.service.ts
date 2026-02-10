@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+
+import { environment } from '@environments/environment.development';
+
+import { ACCESS_TOKEN_KEY, USER_KEY } from '@shared/constants/general.constants';
+
 import { AuthResponse, LoginRequest, SignUpRequest } from '../models/auth.model';
 import { User } from '../models/user.model';
 
@@ -8,9 +13,7 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:3000/api/v1';
-  private readonly USER_KEY = 'auth_data';
-  private readonly ACCESS_TOKEN_KEY = 'access_token';
+  private readonly API_URL = environment.apiBaseUrl;
 
   private readonly userSubject = new BehaviorSubject<User | null>(null);
 
@@ -37,8 +40,8 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(this.ACCESS_TOKEN_KEY);
-    localStorage.removeItem(this.USER_KEY);
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
     this.userSubject.next(null);
   }
 
@@ -51,18 +54,18 @@ export class AuthService {
   }
 
   getAccessToken(): string | null {
-    return localStorage.getItem(this.ACCESS_TOKEN_KEY);
+    return localStorage.getItem(ACCESS_TOKEN_KEY);
   }
 
   private setSession(user: User, token: string): void {
-    localStorage.setItem(this.ACCESS_TOKEN_KEY, token);
-    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+    localStorage.setItem(ACCESS_TOKEN_KEY, token);
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
     this.userSubject.next(user);
   }
 
   private restoreAuthState(): void {
-    const token = localStorage.getItem(this.ACCESS_TOKEN_KEY);
-    const storedUser = localStorage.getItem(this.USER_KEY);
+    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+    const storedUser = localStorage.getItem(USER_KEY);
 
     if (!token || !storedUser) return;
     try {

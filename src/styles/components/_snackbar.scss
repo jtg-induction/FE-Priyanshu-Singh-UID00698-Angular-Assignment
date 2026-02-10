@@ -1,9 +1,17 @@
-.snackbar-success {
-  background-color: #4caf50;
-  color: white;
-}
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-shape: 8px;
+  --mat-mdc-snack-bar-button-color: #fff;
+  --mdc-snackbar-supporting-text-color: #fff;
 
-.snackbar-error {
-  background-color: #f44336;
-  color: white;
+  &.mdc-button__label {
+    color: #fff;
+  }
+
+  &.snackbar-success {
+    --mdc-snackbar-container-color: green;
+  }
+
+  &.snackbar-error {
+    --mdc-snackbar-container-color: red;
+  }
 }
