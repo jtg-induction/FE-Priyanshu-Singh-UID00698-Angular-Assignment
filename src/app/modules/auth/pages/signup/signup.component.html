@@ -1,101 +1,44 @@
-<div class="auth-page">
-  <div class="auth-page__card">
-    <div class="auth-page__header">
-      <h2>Create Account</h2>
-      <p>Sign up to get started</p>
-    </div>
+<app-auth-card
+  title="Create Account"
+  subtitle="Sign up to get started"
+  footerLink="/auth/login"
+  footerLinkText="Login"
+  footerText="Already have an account?"
+>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="auth-form">
+    <app-input-field
+      [control]="getCtrl('username')"
+      label="Username"
+      placeholder="Enter your username"
+      icon="person"
+    />
+    <app-input-field
+      [control]="getCtrl('email')"
+      label="Email"
+      placeholder="Enter your email"
+      icon="email"
+    />
+    <app-input-field
+      [control]="getCtrl('password')"
+      type="password"
+      label="Password"
+      placeholder="Create a Password"
+      icon="lock"
+    />
+    <app-input-field
+      [control]="getCtrl('confirmPassword')"
+      type="password"
+      label="Confirm Password"
+      placeholder="Confirm your password"
+      icon="lock"
+    />
 
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="auth-form">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Username</mat-label>
-        <input
-          matInput
-          formControlName="username"
-          placeholder="Choose a username"
-          autocomplete="username"
-        />
-        <mat-icon matPrefix>person</mat-icon>
-        <mat-error>{{ getErrorMessage('username') }}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          type="email"
-          formControlName="email"
-          placeholder="Enter your email"
-          autocomplete="email"
-        />
-        <mat-icon matPrefix>email</mat-icon>
-        <mat-error>{{ getErrorMessage('email') }}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          [type]="hidePassword ? 'password' : 'text'"
-          formControlName="password"
-          placeholder="Create a password"
-          autocomplete="new-password"
-        />
-        <mat-icon matPrefix>lock</mat-icon>
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="togglePasswordVisibility('password')"
-          aria-label="Toggle password visibility"
-        >
-          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-        </button>
-        <mat-error>{{ getErrorMessage('password') }}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Confirm Password</mat-label>
-        <input
-          matInput
-          [type]="hideConfirmPassword ? 'password' : 'text'"
-          formControlName="confirmPassword"
-          placeholder="Confirm your password"
-          autocomplete="new-password"
-        />
-        <mat-icon matPrefix>lock</mat-icon>
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="togglePasswordVisibility('confirmPassword')"
-          aria-label="Toggle confirm password visibility"
-        >
-          <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-        </button>
-        <mat-error>{{ getErrorMessage('confirmPassword') }}</mat-error>
-      </mat-form-field>
-
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        class="full-width submit-btn"
-        [disabled]="isLoading"
-      >
-        @if (!isLoading) {
-          <span>Create Account</span>
-        }
-        @if (isLoading) {
-          <mat-spinner diameter="20"></mat-spinner>
-        }
-      </button>
-    </form>
-
-    <div class="auth-page__footer">
-      <p>
-        Already have an account?
-        <a routerLink="/auth/login">Login</a>
-      </p>
-    </div>
-  </div>
-</div>
+    <app-button
+      label="Create Account"
+      type="submit"
+      [loading]="isLoading"
+      [disabled]="signupForm.invalid"
+    >
+    </app-button>
+  </form>
+</app-auth-card>

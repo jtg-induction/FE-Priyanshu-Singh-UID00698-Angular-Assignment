@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { LoginRequest } from '@core/models/auth.model';
 import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
-import { getValidationErrorMessage } from '@shared/validators/password.validator';
 
 @Component({
   selector: 'app-login',
@@ -23,12 +24,12 @@ export class LoginComponent {
   constructor() {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required]],
     });
   }
 
-  getErrorMessage(fieldName: string): string {
-    return getValidationErrorMessage(this.loginForm.get(fieldName));
+  getCtrl(name: string): FormControl {
+    return this.loginForm.get(name) as FormControl;
   }
 
   onSubmit(): void {
@@ -41,11 +42,19 @@ export class LoginComponent {
 
     this.isLoading = true;
 
-    this.authService.login(this.loginForm.value).subscribe({
+    const payload: LoginRequest = {
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password,
+    };
+
+    this.authService.login(payload).subscribe({
       next: (value) => {
-        this.isLoading = false;
-        console.log('Login successful', value);
-        this.notificationService.success('Login successful!');
+        setTimeout(() => {
+          this.isLoading = false;
+          console.log('Login successful', value);
+          this.notificationService.success('Login successful!');
+          this.router.navigate(['/']);
+        }, 2000);
       },
       error: () => {
         this.isLoading = false;

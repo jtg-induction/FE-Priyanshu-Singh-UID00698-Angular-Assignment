@@ -1,0 +1,93 @@
+<mat-sidenav-container class="dashboard-container">
+  <mat-sidenav #filterDrawer mode="over" position="end" class="filter-drawer">
+    <div class="filter-drawer__header">
+      <h3>Filters</h3>
+      <button mat-icon-button (click)="filterDrawer.close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="filter-drawer__content">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tags</mat-label>
+        <mat-chip-grid #chipGrid>
+          @for (tag of selectedTags; track tag) {
+            <mat-chip-row removable (removed)="removeTag(tag)"
+              >{{ tag }}<mat-icon matChipRemove>close</mat-icon></mat-chip-row
+            >
+          }
+          <input
+            placeholder="Type tag and press enter"
+            [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="addTag($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label> Sort By</mat-label>
+        <mat-select [(value)]="sortBy">
+          <mat-option value="createdAt">Created At</mat-option>
+          <mat-option value="updatedAt">Updated At</mat-option>
+          <mat-option value="title">Title</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Order</mat-label>
+        <mat-select [(value)]="sortOrder">
+          <mat-option value="DESC">Descending</mat-option>
+          <mat-option value="ASC">Ascending</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="filter-drawer__footer">
+      <button mat-stroked-button color="primary" (click)="loadArticles()">Apply Filters</button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="dashboard">
+      <div class="dashboard__toolbar">
+        <div class="dashboard__search">
+          <app-search-bar
+            label="Articles"
+            placeholder="Search articles..."
+            (searchChange)="onSearchChange($event)"
+          ></app-search-bar>
+        </div>
+
+        <button mat-stroked-button color="primary" class="filter-btn" (click)="filterDrawer.open()">
+          <mat-icon>filter_list</mat-icon>
+          Filter
+        </button>
+      </div>
+      @if (isArticleLoading) {
+        <div class="dashboard__loader">
+          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
+      } @else {
+        @if (articles.length === 0) {
+          <p>No articles found</p>
+        } @else {
+          <div class="dashboard__grid">
+            @for (article of articles; track article.id) {
+              <app-article-card [article]="article"></app-article-card>
+            }
+          </div>
+        }
+      }
+
+      <mat-paginator
+        class="paginator"
+        (page)="handlePageEvent($event)"
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+      >
+      </mat-paginator>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

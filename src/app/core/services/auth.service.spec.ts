@@ -1,15 +1,17 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+
+import { environment } from '@environments/environment.development';
+
 import { AuthResponse, LoginRequest, SignUpRequest } from '@core/models/auth.model';
 import { User } from '@core/models/user.model';
 import { AuthService } from '@core/services/auth.service';
+import { ACCESS_TOKEN_KEY, USER_KEY } from '@shared/constants/general.constants';
 
 describe('AuthService', () => {
   let service: AuthService;
   let httpMock: HttpTestingController;
-  const API_URL = 'http://localhost:3000/api/v1';
-  const USER_KEY = 'auth_data';
-  const ACCESS_TOKEN_KEY = 'access_token';
+  const API_URL = environment.apiBaseUrl;
 
   const mockUser: User = {
     id: '1',

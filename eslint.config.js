@@ -1,45 +1,72 @@
 // @ts-check
-import  eslint  from '@eslint/js';
-import tseslint from 'typescript-eslint'
-import angular from 'angular-eslint'
+import eslint from '@eslint/js';
+import angular from 'angular-eslint';
+import importPlugin from 'eslint-plugin-import';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    files: ["**/*.ts"],
+    files: ['**/*.ts'],
+    plugins: {
+      import: importPlugin,
+    },
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
       tseslint.configs.stylistic,
       angular.configs.tsRecommended,
-      eslintPluginPrettierRecommended
+      eslintPluginPrettierRecommended,
     ],
     processor: angular.processInlineTemplates,
     rules: {
-      "@angular-eslint/directive-selector": [
-        "error",
+      'import/order': [
+        'error',
         {
-          type: "attribute",
-          prefix: "app",
-          style: "camelCase",
+          'newlines-between': 'always-and-inside-groups',
+          groups: ['external', 'builtin', 'internal', 'sibling', 'parent', 'index'],
+          pathGroups: [
+            {
+              pattern: '@angular/**',
+              group: 'external',
+            },
+            {
+              pattern: '(rxjs|rxjs/**)',
+              group: 'external',
+            },
+            {
+              pattern: '@core/**',
+              group: 'internal',
+            },
+            {
+              pattern: '@shared/**',
+              group: 'internal',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['type', 'object'],
         },
       ],
-      "@angular-eslint/component-selector": [
-        "error",
+      '@angular-eslint/directive-selector': [
+        'error',
         {
-          type: "element",
-          prefix: "app",
-          style: "kebab-case",
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase',
+        },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case',
         },
       ],
     },
   },
   {
-    files: ["**/*.html"],
-    extends: [
-      angular.configs.templateRecommended,
-      angular.configs.templateAccessibility,
-    ],
+    files: ['**/*.html'],
+    extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
     rules: {},
   }
 );

@@ -1,10 +1,12 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { catchError, throwError } from 'rxjs';
+
 import { ApiError } from '@core/models/api-response.model';
 import { NotificationService } from '@core/services/notification.service';
-import { ERROR_MESSAGES } from '@shared/constants/error.constants';
-import { catchError, throwError } from 'rxjs';
+import { ERROR_MESSAGES, SERVER_ERROR_CODES } from '@shared/constants/error.constants';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const notificationService = inject(NotificationService);
@@ -14,9 +16,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       const apiError = error.error as ApiError;
 
-      let message = 'Something went wrong. Please try again';
+      let message = ERROR_MESSAGES.GENERIC_ERROR;
       if (apiError?.code) {
-        message = ERROR_MESSAGES[apiError.code] ?? apiError.message ?? message;
+        message = SERVER_ERROR_CODES[apiError.code] ?? apiError.message ?? message;
       }
 
       if (error.status === 401) {
