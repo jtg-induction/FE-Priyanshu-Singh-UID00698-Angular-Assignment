@@ -8,10 +8,10 @@
   }
 
   &.snackbar-success {
-    --mdc-snackbar-container-color: green;
+    --mdc-snackbar-container-color: rgb(4 70 10);
   }
 
   &.snackbar-error {
-    --mdc-snackbar-container-color: red;
+    --mdc-snackbar-container-color: rgb(68 4 4);
   }
 }

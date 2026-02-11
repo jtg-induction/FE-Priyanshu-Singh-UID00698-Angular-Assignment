@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 
-import { delay, finalize } from 'rxjs';
+import { finalize } from 'rxjs';
 
 import { LoadingService } from '@core/services/loading.service';
 
@@ -10,7 +10,6 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
 
   loadingService.show();
   return next(req).pipe(
-    delay(2000),
     finalize(() => {
       loadingService.hide();
     })
