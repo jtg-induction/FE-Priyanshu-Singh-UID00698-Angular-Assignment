@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ArticleService } from '@modules/dashboard/services/article.service';
 
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml, Title } from '@angular/platform-browser';
 
 import { Article } from '@core/models/article.model';
 
@@ -20,6 +20,7 @@ export class ArticleDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private articleService = inject(ArticleService);
   private sanitizer = inject(DomSanitizer);
+  private title = inject(Title);
 
   ngOnInit(): void {
     console.log(this.route);
@@ -32,6 +33,7 @@ export class ArticleDetailComponent implements OnInit {
     this.articleService.getArticleDetails(id).subscribe({
       next: (res) => {
         this.article = res.data;
+        this.title.setTitle(`DevAlgo | ${this.article.title}`);
         this.sanitizedDescription = this.sanitizer.bypassSecurityTrustHtml(
           this.article.description
         );

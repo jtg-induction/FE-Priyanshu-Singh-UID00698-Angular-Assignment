@@ -2,19 +2,18 @@
 
 .article-detail {
   padding: px-to-rem(40) px-to-rem(16);
-  background: var(--color-bg-page);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 
   &__container {
-    max-width: px-to-rem(900);
+    max-width: px-to-rem(1100);
     margin: 0 auto;
     background: var(--color-bg-card);
     padding: px-to-rem(20);
-    border-radius: px-to-rem(12);
-    box-shadow: 0 px-to-rem(8) px-to-rem(24) rgb(0 0 0 / 5%);
+    border-radius: px-to-rem(6);
+    box-shadow: 0 px-to-rem(8) px-to-rem(24) rgb(0 0 0 / 15%);
   }
 
   &__header {

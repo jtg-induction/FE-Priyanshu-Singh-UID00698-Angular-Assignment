@@ -26,8 +26,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
-  { path: 'error', component: ErrorComponent },
-  { path: '**', component: NotFoundComponent },
+  { path: 'error', component: ErrorComponent, title: 'DevAlgo | Error' },
+  { path: '**', component: NotFoundComponent, title: 'DevAlgo | Not Found' },
 ];
 
 @NgModule({

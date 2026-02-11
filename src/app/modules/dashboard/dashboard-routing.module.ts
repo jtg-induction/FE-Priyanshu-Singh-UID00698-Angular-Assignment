@@ -5,7 +5,7 @@ import { ArticleDetailComponent } from './pages/article-detail/article-detail.co
 import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, title: 'DevAlgo | Articles' },
   { path: ':id', component: ArticleDetailComponent },
 ];
 

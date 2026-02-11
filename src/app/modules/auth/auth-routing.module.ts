@@ -5,8 +5,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent, title: 'DevAlgo | Login' },
+  { path: 'signup', component: SignupComponent, title: 'DevAlgo | Signup' },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
