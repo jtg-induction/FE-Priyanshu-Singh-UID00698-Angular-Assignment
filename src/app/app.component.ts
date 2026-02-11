@@ -6,7 +6,8 @@ import {
   NavigationStart,
   Router,
 } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+
+import { LoadingService } from '@core/services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -14,17 +15,23 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  private spinner = inject(NgxSpinnerService);
+  private loadingService = inject(LoadingService);
   private router = inject(Router);
   title = 'DevAlgo';
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) this.spinner.show();
-      if (event instanceof NavigationError) {
-        this.spinner.hide();
-        this.router.navigate(['/error']);
+      if (event instanceof NavigationStart) this.loadingService.show();
+
+      if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationCancel
+      ) {
+        this.loadingService.hide();
+        if (event instanceof NavigationError) {
+          this.router.navigate(['/error']);
+        }
       }
-      if (event instanceof NavigationEnd || event instanceof NavigationCancel) this.spinner.hide();
     });
   }
 }

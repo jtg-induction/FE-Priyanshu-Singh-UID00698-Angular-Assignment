@@ -12,12 +12,11 @@ export class NavbarComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
-
   redirectToHome(): void {
     this.router.navigate(['/']);
+  }
+  logout(): void {
+    this.authService.logout();
+    this.redirectToHome();
   }
 }
