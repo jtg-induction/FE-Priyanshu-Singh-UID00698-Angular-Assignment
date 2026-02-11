@@ -1,6 +1,6 @@
 @use 'abstracts' as *;
 
-.not-found {
+.error {
   height: 100vh;
   display: flex;
   align-items: center;
@@ -24,7 +24,6 @@
     font-size: px_to_rem(48);
     font-weight: 700;
     color: var(--color-text-heading);
-    margin-top: px_to_rem(-100);
     margin-bottom: px_to_rem(32);
     line-height: 1.6;
   }

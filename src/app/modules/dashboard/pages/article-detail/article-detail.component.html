@@ -1,9 +1,5 @@
 <div class="article-detail">
-  @if (isLoading) {
-    <mat-progress-spinner mode="indeterminate" />
-  }
-
-  @if (!isLoading && article) {
+  @if (article) {
     <div class="article-detail__container">
       <div class="article-detail__header">
         <h1 class="article-detail__title">

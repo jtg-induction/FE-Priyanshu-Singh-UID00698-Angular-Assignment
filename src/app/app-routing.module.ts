@@ -9,6 +9,7 @@ import { DashboardLayoutComponent } from '@modules/dashboard/dashboard-layout/da
 import { authGuard } from '@core/guards/auth.guard';
 import { guestGuard } from '@core/guards/guest.guard';
 
+import { ErrorComponent } from '@core/pages/error/error.component';
 import { NotFoundComponent } from '@core/pages/not-found/not-found.component';
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
+  { path: 'error', component: ErrorComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

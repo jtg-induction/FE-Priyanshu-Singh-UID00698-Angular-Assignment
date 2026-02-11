@@ -14,7 +14,7 @@ import { Article } from '@core/models/article.model';
 })
 export class ArticleDetailComponent implements OnInit {
   article!: Article;
-  isLoading = false;
+
   sanitizedDescription!: SafeHtml;
 
   private route = inject(ActivatedRoute);
@@ -29,18 +29,15 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   loadArticle(id: string): void {
-    this.isLoading = true;
     this.articleService.getArticleDetails(id).subscribe({
       next: (res) => {
         this.article = res.data;
         this.sanitizedDescription = this.sanitizer.bypassSecurityTrustHtml(
           this.article.description
         );
-        this.isLoading = false;
       },
       error: (err) => {
         console.log(err);
-        this.isLoading = false;
       },
     });
   }

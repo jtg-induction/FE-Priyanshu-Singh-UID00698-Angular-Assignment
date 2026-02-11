@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-not-found',
-  templateUrl: './not-found.component.html',
-  styleUrl: './not-found.component.scss',
+  selector: 'app-error',
+  templateUrl: './error.component.html',
+  styleUrl: './error.component.scss',
 })
-export class NotFoundComponent {
+export class ErrorComponent {
   private router = inject(Router);
 
   goHome(): void {
