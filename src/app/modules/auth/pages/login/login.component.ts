@@ -49,12 +49,10 @@ export class LoginComponent {
 
     this.authService.login(payload).subscribe({
       next: (value) => {
-        setTimeout(() => {
-          this.isLoading = false;
-          console.log('Login successful', value);
-          this.notificationService.success('Login successful!');
-          this.router.navigate(['/']);
-        }, 2000);
+        this.isLoading = false;
+        console.log('Login successful', value);
+        this.notificationService.success('Login successful!');
+        this.router.navigate(['/articles']);
       },
       error: () => {
         this.isLoading = false;

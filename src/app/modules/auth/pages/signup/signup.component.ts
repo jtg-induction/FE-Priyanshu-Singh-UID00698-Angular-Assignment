@@ -57,13 +57,10 @@ export class SignupComponent {
 
     this.authService.signup(payload).subscribe({
       next: (response) => {
-        setTimeout(() => {
-          console.log('Second line runs after a 2-second delay.');
-        }, 2000);
         this.isLoading = false;
         console.log('Signup successful:', response);
         this.notificationService.success('Account created successfully!');
-        this.router.navigate(['/']);
+        this.router.navigate(['/articles']);
       },
       error: (error) => {
         this.isLoading = false;

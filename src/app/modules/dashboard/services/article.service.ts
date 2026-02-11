@@ -5,7 +5,7 @@ import { environment } from '@environments/environment';
 
 import { Observable } from 'rxjs';
 
-import { ArticlesBulkResponse } from '@core/models/article.model';
+import { ArticleDetailResponse, ArticlesBulkResponse } from '@core/models/article.model';
 
 @Injectable()
 export class ArticleService {
@@ -14,5 +14,9 @@ export class ArticleService {
 
   getArticles(params: HttpParams): Observable<ArticlesBulkResponse> {
     return this.http.get<ArticlesBulkResponse>(`${this.baseUrl}/articles`, { params });
+  }
+
+  getArticleDetails(id: string): Observable<ArticleDetailResponse> {
+    return this.http.get<ArticleDetailResponse>(`${this.baseUrl}/articles/${id}`);
   }
 }

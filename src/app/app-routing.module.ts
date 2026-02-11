@@ -13,13 +13,13 @@ import { NotFoundComponent } from '@core/pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: '',
     component: AuthLayoutComponent,
     canActivate: [guestGuard],
     loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: '',
+    path: 'articles',
     component: DashboardLayoutComponent,
     canActivate: [authGuard],
     loadChildren: () =>

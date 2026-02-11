@@ -13,12 +13,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { SharedModule } from '@shared/shared.module';
 
+import { ArticleListComponent } from './components/article-list/article-list.component';
+import { FilterDrawerComponent } from './components/filter-drawer/filter-drawer.component';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { ArticleDetailComponent } from './pages/article-detail/article-detail.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ArticleService } from './services/article.service';
-import { FilterDrawerComponent } from './components/filter-drawer/filter-drawer.component';
-import { ArticleListComponent } from './components/article-list/article-list.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ArticleListComponent } from './components/article-list/article-list.com
     HomeComponent,
     FilterDrawerComponent,
     ArticleListComponent,
+    ArticleDetailComponent,
   ],
   imports: [
     CommonModule,

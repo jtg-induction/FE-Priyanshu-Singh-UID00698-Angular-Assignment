@@ -16,6 +16,7 @@ import { ArticleCardComponent } from './components/article/article-card/article-
 import { AuthCardComponent } from './components/auth-card/auth-card.component';
 import { ButtonComponent } from './components/button/button.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
+import { LoaderComponent } from './components/loader/loader.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ValidationErrorPipe } from './pipe/validation-error.pipe';
@@ -29,6 +30,7 @@ import { ValidationErrorPipe } from './pipe/validation-error.pipe';
     ArticleCardComponent,
     SearchBarComponent,
     NavbarComponent,
+    LoaderComponent,
   ],
 
   imports: [
@@ -58,6 +60,7 @@ import { ValidationErrorPipe } from './pipe/validation-error.pipe';
     ArticleCardComponent,
     SearchBarComponent,
     NavbarComponent,
+    LoaderComponent,
   ],
 })
 export class SharedModule {}

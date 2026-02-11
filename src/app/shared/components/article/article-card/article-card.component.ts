@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Article } from '@core/models/article.model';
 
@@ -9,4 +10,9 @@ import { Article } from '@core/models/article.model';
 })
 export class ArticleCardComponent {
   @Input({ required: true }) article!: Article;
+  private router = inject(Router);
+
+  openArticleDetialsPage(): void {
+    this.router.navigate(['/articles', this.article.id]);
+  }
 }
