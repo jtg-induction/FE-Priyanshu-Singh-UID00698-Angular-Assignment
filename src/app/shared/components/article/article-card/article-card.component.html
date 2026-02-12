@@ -15,9 +15,13 @@
       <span class="separator">&#8226;</span>
       <span>{{ article.createdAt | date: 'mediumDate' }}</span>
     </div>
+
     <div class="article-card__tags">
-      @for (tag of article.tags; track $index) {
+      @for (tag of visibleTags; track $index) {
         <span class="tag">{{ tag }}</span>
+      }
+      @if (remainingTagCount > 0) {
+        <span class="tag"> +{{ remainingTagCount }} </span>
       }
     </div>
   </mat-card-content>

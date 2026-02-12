@@ -48,9 +48,9 @@ export class AuthService {
     return !!this.userSubject.value;
   }
 
-  getCurrentUser(): User | null {
-    return this.userSubject.value;
-  }
+  // getCurrentUser(): User | null {
+  //   return this.userSubject.value;
+  // }
 
   getAccessToken(): string | null {
     return localStorage.getItem(ACCESS_TOKEN_KEY);

@@ -15,6 +15,7 @@ export class NavbarComponent {
   redirectToHome(): void {
     this.router.navigate(['/']);
   }
+
   logout(): void {
     this.authService.logout();
     this.redirectToHome();

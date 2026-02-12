@@ -41,7 +41,6 @@ import { ValidationErrorPipe } from './pipe/validation-error.pipe';
     MatButtonModule,
     MatProgressSpinnerModule,
     CdkVirtualScrollableElement,
-
     MatCardModule,
     MatToolbarModule,
   ],
