@@ -7,7 +7,7 @@ import {
   Router,
 } from '@angular/router';
 
-import { LoadingService } from '@core/loading.service';
+import { LoadingService } from '@core/services/loadingService/loading.service';
 
 @Component({
   selector: 'app-root',
