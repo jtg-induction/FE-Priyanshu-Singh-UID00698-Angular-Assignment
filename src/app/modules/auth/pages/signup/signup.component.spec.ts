@@ -70,15 +70,15 @@ describe('SignupComponent', () => {
     component.signupForm.setValue({
       username: 'testuser',
       email: 'test@test.com',
-      password: 'Password@123',
-      confirmPassword: 'Password@123',
+      password: 'Ab@12@34',
+      confirmPassword: 'Ab@12@34',
     });
 
     component.onSubmit();
 
     expect(authServiceSpy.signup).toHaveBeenCalled();
     expect(notificationServiceSpy.success).toHaveBeenCalledWith('Account created successfully!');
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/dashboard']);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/articles']);
   });
 
   it('should toggle password visibility', () => {

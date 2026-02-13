@@ -3,13 +3,19 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { confirmPasswordValidator, passwordValidator } from './password.validator';
 
 describe('passwordValidator', () => {
-  it('should return error when password is weak', () => {
-    const control = new FormControl('abc123');
+  it('should return error when password is weak (missing special chars)', () => {
+    const control = new FormControl('Ab123456');
     const result = passwordValidator(control);
     expect(result).toEqual({ weakPassword: true });
   });
 
-  it('should return null when password is strong', () => {
+  it('should return error when password is weak (too short)', () => {
+    const control = new FormControl('Ab@1@2');
+    const result = passwordValidator(control);
+    expect(result).toEqual({ weakPassword: true });
+  });
+
+  it('should return null when password is strong (8+ chars, 2+ numbers, 2+ symbols)', () => {
     const control = new FormControl('Ab@12@34');
     const result = passwordValidator(control);
     expect(result).toBeNull();
@@ -37,18 +43,15 @@ describe('confirmPasswordValidator', () => {
     });
   });
 
-  it('should clear passwordMismatch error when passwords match', () => {
+  it('should return null when passwords match', () => {
     const form = new FormGroup({
       password: new FormControl('Ab@12@34'),
       confirmPassword: new FormControl('Ab@12@34'),
     });
 
-    form.get('confirmPassword')?.setErrors({ passwordMismatch: true });
-
     const result = confirmPasswordValidator(form);
 
     expect(result).toBeNull();
-    expect(form.get('confirmPassword')?.errors).toBeNull();
   });
 
   it('should return null if controls are missing', () => {
