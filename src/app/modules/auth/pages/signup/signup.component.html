@@ -1,0 +1,44 @@
+<app-auth-card
+  title="Create Account"
+  subtitle="Sign up to get started"
+  footerLink="/auth/login"
+  footerLinkText="Login"
+  footerText="Already have an account?"
+>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="auth-form">
+    <app-input-field
+      [control]="getCtrl('username')"
+      label="Username"
+      placeholder="Enter your username"
+      icon="person"
+    />
+    <app-input-field
+      [control]="getCtrl('email')"
+      label="Email"
+      placeholder="Enter your email"
+      icon="email"
+    />
+    <app-input-field
+      [control]="getCtrl('password')"
+      type="password"
+      label="Password"
+      placeholder="Create a Password"
+      icon="lock"
+    />
+    <app-input-field
+      [control]="getCtrl('confirmPassword')"
+      type="password"
+      label="Confirm Password"
+      placeholder="Confirm your password"
+      icon="lock"
+    />
+
+    <app-button
+      label="Create Account"
+      type="submit"
+      [loading]="isLoading"
+      [disabled]="signupForm.invalid"
+    >
+    </app-button>
+  </form>
+</app-auth-card>

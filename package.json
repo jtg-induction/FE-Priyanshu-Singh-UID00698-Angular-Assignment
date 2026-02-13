@@ -18,7 +18,7 @@
       "eslint --fix"
     ],
     "*.html": [
-      "prettier --fix"
+      "prettier --write"
     ],
     "*.scss": [
       "stylelint --fix"

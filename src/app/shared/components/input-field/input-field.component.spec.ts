@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotFoundComponent } from './not-found.component';
+import { InputFieldComponent } from './input-field.component';
 
-describe('NotFoundComponent', () => {
-  let component: NotFoundComponent;
-  let fixture: ComponentFixture<NotFoundComponent>;
+describe('InputFieldComponent', () => {
+  let component: InputFieldComponent;
+  let fixture: ComponentFixture<InputFieldComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotFoundComponent],
+      declarations: [InputFieldComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NotFoundComponent);
+    fixture = TestBed.createComponent(InputFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,89 @@
+@use 'abstracts' as *;
+
+.auth-page {
+  min-height: 94.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-page);
+  padding: px-to-rem(24);
+
+  &__card {
+    width: 100%;
+    max-width: px-to-rem(420);
+    background: var(--color-bg-card);
+    border-radius: px-to-rem(12);
+    padding: px-to-rem(32);
+    box-shadow: 0 px-to-rem(10) px-to-rem(30) rgb(0 0 0 / 8%);
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: px-to-rem(32);
+
+    h2 {
+      margin: 0 0 px-to-rem(8);
+      font-size: px-to-rem(28);
+      font-weight: 600;
+      color: var(--color-text-heading);
+    }
+
+    p {
+      margin: 0;
+      color: var(--color-text-body);
+      font-size: px-to-rem(16);
+    }
+  }
+
+  &__footer {
+    text-align: center;
+    margin-top: px-to-rem(24);
+    padding-top: px-to-rem(24);
+    border-top: 1px solid var(--color-border);
+
+    p {
+      margin: 0;
+      font-size: px-to-rem(16);
+      color: var(--color-text-body);
+
+      a {
+        color: var(--color-primary);
+        font-weight: 500;
+        text-decoration: none;
+
+        &:hover {
+          cursor: pointer;
+          color: var(--color-primary-hover);
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+@media (width <= 600px) {
+  .auth-page {
+    padding: px-to-rem(16);
+
+    &__card {
+      padding: px-to-rem(24);
+    }
+
+    &__header h2 {
+      font-size: px-to-rem(24);
+    }
+  }
+}
+
+.button {
+  height: 48px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: px-to-rem(8);
+}
+
+.btn-icon {
+  font-size: px-to-rem(16);
+}

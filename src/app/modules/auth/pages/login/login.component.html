@@ -1,0 +1,31 @@
+<app-auth-card
+  title="Welcome Back"
+  subtitle="Login to your account"
+  footerText=" Don't have an account?"
+  footerLinkText="Sign up"
+  footerLink="/auth/signup"
+>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+    <app-input-field
+      [control]="getCtrl('username')"
+      label="Username"
+      placeholder="Enter your username"
+      icon="person"
+    />
+
+    <app-input-field
+      [control]="getCtrl('password')"
+      type="password"
+      label="Passoword"
+      placeholder="Enter your Passoword"
+      icon="lock"
+    />
+
+    <app-button
+      type="submit"
+      label="Login"
+      [loading]="isLoading"
+      [disabled]="loginForm.invalid"
+    ></app-button>
+  </form>
+</app-auth-card>
