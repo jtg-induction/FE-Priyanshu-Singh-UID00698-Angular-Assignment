@@ -1,23 +1,23 @@
 @use 'abstracts' as *;
 
 .filter-drawer {
-  width: px_to_rem(376);
+  width: px-to-rem(376);
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: px_to_rem(16);
+  padding: px-to-rem(16);
 
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: px_to_rem(16);
+    margin-bottom: px-to-rem(16);
     flex-shrink: 0;
   }
 
   &__title {
     margin: 0;
-    font-size: px_to_rem(28);
+    font-size: px-to-rem(28);
     font-weight: 500;
   }
 
@@ -25,19 +25,19 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: px_to_rem(16);
+    gap: px-to-rem(16);
     overflow: hidden auto;
   }
 
   &__field {
     width: 100%;
-    margin-top: px_to_rem(16);
+    margin-top: px-to-rem(16);
   }
 
   &__footer {
     display: flex;
-    gap: px_to_rem(12);
+    gap: px-to-rem(12);
     justify-content: flex-end;
-    padding-top: px_to_rem(16);
+    padding-top: px-to-rem(16);
   }
 }

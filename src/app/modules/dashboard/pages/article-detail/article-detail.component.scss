@@ -14,7 +14,7 @@
     border-radius: px-to-rem(6);
     display: flex;
     flex-direction: column;
-    gap: px_to_rem(32);
+    gap: px-to-rem(32);
   }
 
   &__title {
@@ -46,8 +46,8 @@
     img {
       width: 100%;
       border-radius: px-to-rem(10);
-      object-fit: cover;
-      max-height: px-to-rem(500);
+      object-fit: contain;
+      max-height: px-to-rem(250);
     }
   }
 
@@ -68,6 +68,7 @@
   }
 
   &__content {
+    overflow-wrap: break-word;
     font-size: px-to-rem(16);
     line-height: 1.8;
     color: var(--color-text-body);

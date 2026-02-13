@@ -5,14 +5,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: px_to_rem(24);
+  padding: px-to-rem(24);
 
   &__container {
-    margin-top: px_to_rem(-100);
-    padding: px_to_rem(48);
-    border-radius: px_to_rem(20);
+    margin-top: px-to-rem(-100);
+    padding: px-to-rem(48);
+    border-radius: px-to-rem(20);
     text-align: center;
-    max-width: px_to_rem(720);
+    max-width: px-to-rem(720);
     width: 100%;
   }
 
@@ -21,11 +21,11 @@
   }
 
   &__description {
-    font-size: px_to_rem(48);
+    font-size: px-to-rem(48);
     font-weight: 700;
     color: var(--color-text-heading);
-    margin-top: px_to_rem(-100);
-    margin-bottom: px_to_rem(32);
+    margin-top: px-to-rem(-100);
+    margin-bottom: px-to-rem(32);
     line-height: 1.6;
   }
 }

@@ -1,0 +1,8 @@
+.app-container {
+  max-width: px-to-rem(1728);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

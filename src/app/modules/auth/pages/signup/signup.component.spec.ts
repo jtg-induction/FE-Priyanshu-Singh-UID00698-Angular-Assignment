@@ -2,10 +2,13 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { of } from 'rxjs';
+
 import { AuthResponse } from '@core/models/auth.model';
 import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
-import { of } from 'rxjs';
+
 import { SignupComponent } from './signup.component';
 
 describe('SignupComponent', () => {
