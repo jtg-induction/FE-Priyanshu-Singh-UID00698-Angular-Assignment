@@ -6,6 +6,7 @@ import { ArticleService } from '@modules/dashboard/services/article.service';
 import { DomSanitizer, SafeHtml, Title } from '@angular/platform-browser';
 
 import { Article } from '@core/models/article.model';
+import { NotificationService } from '@core/services/notificationService/notification.service';
 
 @Component({
   selector: 'app-article-detail',
@@ -21,9 +22,9 @@ export class ArticleDetailComponent implements OnInit {
   private articleService = inject(ArticleService);
   private sanitizer = inject(DomSanitizer);
   private title = inject(Title);
+  private notification = inject(NotificationService);
 
   ngOnInit(): void {
-    console.log(this.route);
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) return;
     this.loadArticle(id);
@@ -38,8 +39,8 @@ export class ArticleDetailComponent implements OnInit {
           this.article.description
         );
       },
-      error: (err) => {
-        console.log(err);
+      error: () => {
+        this.notification.error('Error While loading the Article');
       },
     });
   }

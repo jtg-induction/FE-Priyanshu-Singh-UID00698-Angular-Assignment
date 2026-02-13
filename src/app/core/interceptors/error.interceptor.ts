@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
 import { ApiError } from '@core/models/api-response.model';
-import { NotificationService } from '@core/services/notification.service';
+import { NotificationService } from '@core/services/notificationService/notification.service';
 import { ERROR_MESSAGES, SERVER_ERROR_CODES } from '@shared/constants/error.constants';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {

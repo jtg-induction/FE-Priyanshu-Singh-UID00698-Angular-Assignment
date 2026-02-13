@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { SignUpRequest } from '@core/models/auth.model';
-import { AuthService } from '@core/services/auth.service';
-import { NotificationService } from '@core/services/notification.service';
+import { AuthService } from '@core/services/authService/auth.service';
+import { NotificationService } from '@core/services/notificationService/notification.service';
 import { confirmPasswordValidator, passwordValidator } from '@shared/validators/password.validator';
 
 @Component({
@@ -56,15 +56,13 @@ export class SignupComponent {
     };
 
     this.authService.signup(payload).subscribe({
-      next: (response) => {
+      next: () => {
         this.isLoading = false;
-        console.log('Signup successful:', response);
         this.notificationService.success('Account created successfully!');
         this.router.navigate(['/articles']);
       },
-      error: (error) => {
+      error: () => {
         this.isLoading = false;
-        console.error('Signup failed:', error);
       },
     });
   }

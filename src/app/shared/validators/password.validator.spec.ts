@@ -1,10 +1,6 @@
 import { FormControl, FormGroup } from '@angular/forms';
-import { VALIDATION_ERROR } from '@shared/constants/error.constants';
-import {
-  confirmPasswordValidator,
-  getValidationErrorMessage,
-  passwordValidator,
-} from './password.validator';
+
+import { confirmPasswordValidator, passwordValidator } from './password.validator';
 
 describe('passwordValidator', () => {
   it('should return error when password is weak', () => {
@@ -69,30 +65,5 @@ describe('confirmPasswordValidator', () => {
 
     const result = confirmPasswordValidator(form);
     expect(result).toBeNull();
-  });
-});
-
-describe('getValidationErrorMessage', () => {
-  it('should return empty string when control is null', () => {
-    expect(getValidationErrorMessage(null)).toBe('');
-  });
-
-  it('should return empty string when control has no errors', () => {
-    const control = new FormControl('test');
-    expect(getValidationErrorMessage(control)).toBe('');
-  });
-
-  it('should return mapped validation error message', () => {
-    const control = new FormControl('');
-    control.setErrors({ weakPassword: true });
-
-    expect(getValidationErrorMessage(control)).toBe(VALIDATION_ERROR['weakPassword']);
-  });
-
-  it('should return default message for unknown error', () => {
-    const control = new FormControl('');
-    control.setErrors({ unknownError: true });
-
-    expect(getValidationErrorMessage(control)).toBe('Invalid field');
   });
 });

@@ -20,7 +20,6 @@ export const confirmPasswordValidator = (group: AbstractControl): ValidationErro
 
   if (!passwordCtrl.value || !confirmCtrl.value) return null;
 
-  console.log(confirmCtrl);
   if (passwordCtrl.value !== confirmCtrl.value) {
     confirmCtrl.setErrors({ ...(confirmCtrl.errors || {}), passwordMismatch: true });
     return { passwordMismatch: true };

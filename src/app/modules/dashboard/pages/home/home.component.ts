@@ -14,7 +14,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 import { Article } from '@core/models/article.model';
 import { DashBoardFilter, sortByType, sortOrderType } from '@core/models/dashboard-filter.model';
-import { NotificationService } from '@core/services/notification.service';
+import { NotificationService } from '@core/services/notificationService/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -59,7 +59,6 @@ export class HomeComponent implements OnInit {
     });
 
     this.route.queryParams.subscribe((params) => {
-      console.log('URL PARAMS', params);
       const urlPage = +params['page'] || 1;
       this.pageIndex = Math.max(0, urlPage - 1);
       this.pageSize = +params['pageSize'] || 6;
@@ -148,14 +147,12 @@ export class HomeComponent implements OnInit {
 
     this.articleService.getArticles(param).subscribe({
       next: (response) => {
-        console.log(response);
         this.articles = response.data.data;
         this.pageSize = response.data.pageSize;
         this.length = response.data.totalItems;
         this.isArticleLoading = false;
       },
-      error: (err) => {
-        console.log(err);
+      error: () => {
         this.isArticleLoading = false;
         this.snackbar.error('Failed to fetch articles');
       },

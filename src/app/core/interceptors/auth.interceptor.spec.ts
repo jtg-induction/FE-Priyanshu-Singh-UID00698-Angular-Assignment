@@ -2,7 +2,7 @@ import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { AuthService } from '@core/services/auth.service';
+import { AuthService } from '@core/services/authService/auth.service';
 
 import { AuthInterceptor } from './auth.interceptor';
 
