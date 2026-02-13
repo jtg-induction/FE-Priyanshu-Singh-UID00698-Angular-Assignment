@@ -10,7 +10,6 @@
     "test": "ng test",
     "lint": "ng lint --fix",
     "lint:scss": "stylelint \"src/**/*.scss\" --fix",
-    "docs": "typedoc",
     "prepare": "husky"
   },
   "lint-staged": {

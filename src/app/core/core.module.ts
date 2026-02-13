@@ -18,6 +18,5 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     { provide: ErrorHandler, useClass: GlobalError },
     provideHttpClient(withInterceptors([loadingInterceptor, AuthInterceptor, errorInterceptor])),
   ],
-  exports: [NotFoundComponent, ErrorComponent],
 })
 export class CoreModule {}

@@ -27,8 +27,7 @@ export class HomeComponent implements OnInit {
 
   articles: Article[] = [];
   selectedTags: string[] = [];
-  isArticleLoading = false;
-  isTagsLoading = false;
+
   sortBy: sortByType = 'createdAt';
   sortOrder: sortOrderType = 'DESC';
   currentSearch = '';
@@ -141,8 +140,6 @@ export class HomeComponent implements OnInit {
   }
 
   loadArticles(): void {
-    this.isArticleLoading = true;
-
     const param = this.buildParams();
 
     this.articleService.getArticles(param).subscribe({
@@ -150,10 +147,8 @@ export class HomeComponent implements OnInit {
         this.articles = response.data.data;
         this.pageSize = response.data.pageSize;
         this.length = response.data.totalItems;
-        this.isArticleLoading = false;
       },
       error: () => {
-        this.isArticleLoading = false;
         this.snackbar.error('Failed to fetch articles');
       },
     });

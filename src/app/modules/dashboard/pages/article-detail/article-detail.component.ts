@@ -39,9 +39,6 @@ export class ArticleDetailComponent implements OnInit {
           this.article.description
         );
       },
-      error: () => {
-        this.notification.error('Error While loading the Article');
-      },
     });
   }
 }
