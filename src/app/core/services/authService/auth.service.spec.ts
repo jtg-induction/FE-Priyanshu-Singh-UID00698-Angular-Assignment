@@ -5,7 +5,7 @@ import { environment } from '@environments/environment.development';
 
 import { AuthResponse, LoginRequest, SignUpRequest } from '@core/models/auth.model';
 import { User } from '@core/models/user.model';
-import { AuthService } from '@core/services/auth.service';
+import { AuthService } from '@core/services/authService/auth.service';
 import { ACCESS_TOKEN_KEY, USER_KEY } from '@shared/constants/general.constants';
 
 describe('AuthService', () => {

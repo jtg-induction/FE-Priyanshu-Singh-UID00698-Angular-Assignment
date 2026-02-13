@@ -12,6 +12,6 @@
   }
 
   @if (control.invalid && (control.touched || control.dirty)) {
-    <mat-error>{{ control.errors | validationError }}</mat-error>
+    <mat-error class="error">{{ control.errors | validationError }}</mat-error>
   }
 </mat-form-field>

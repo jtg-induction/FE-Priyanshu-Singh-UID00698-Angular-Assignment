@@ -1,16 +1,10 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',
   styleUrl: './input-field.component.scss',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputFieldComponent),
-    },
-  ],
 })
 export class InputFieldComponent {
   @Input({ required: true }) control!: FormControl;

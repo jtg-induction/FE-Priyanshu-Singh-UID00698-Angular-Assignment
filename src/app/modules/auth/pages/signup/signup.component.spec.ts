@@ -2,10 +2,13 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthResponse } from '@core/models/auth.model';
-import { AuthService } from '@core/services/auth.service';
-import { NotificationService } from '@core/services/notification.service';
+
 import { of } from 'rxjs';
+
+import { AuthResponse } from '@core/models/auth.model';
+import { AuthService } from '@core/services/authService/auth.service';
+import { NotificationService } from '@core/services/notificationService/notification.service';
+
 import { SignupComponent } from './signup.component';
 
 describe('SignupComponent', () => {
@@ -67,15 +70,15 @@ describe('SignupComponent', () => {
     component.signupForm.setValue({
       username: 'testuser',
       email: 'test@test.com',
-      password: 'Password@123',
-      confirmPassword: 'Password@123',
+      password: 'Ab@12@34',
+      confirmPassword: 'Ab@12@34',
     });
 
     component.onSubmit();
 
     expect(authServiceSpy.signup).toHaveBeenCalled();
     expect(notificationServiceSpy.success).toHaveBeenCalledWith('Account created successfully!');
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/dashboard']);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/articles']);
   });
 
   it('should toggle password visibility', () => {

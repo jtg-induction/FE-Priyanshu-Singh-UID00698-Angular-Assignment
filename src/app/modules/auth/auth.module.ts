@@ -7,7 +7,9 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { SharedModule } from '@shared/shared.module';
+
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './pages/login/login.component';

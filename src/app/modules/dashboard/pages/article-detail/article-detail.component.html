@@ -1,0 +1,29 @@
+<div class="article-detail">
+  @if (article) {
+    <div class="article-detail__container">
+      <div class="article-detail__header">
+        <h1 class="article-detail__title">
+          {{ article.title }}
+        </h1>
+
+        <div class="article-detail__meta">
+          <span class="author">By {{ article.author }}</span>
+          <span class="dot">•</span>
+          <span>{{ article.createdAt | date: 'mediumDate' }}</span>
+        </div>
+      </div>
+
+      <div class="article-detail__image">
+        <img [src]="article.image" [alt]="article.title" />
+      </div>
+
+      <div class="article-detail__tags">
+        @for (tag of article.tags; track $index) {
+          <span class="tag">{{ tag }}</span>
+        }
+      </div>
+
+      <div class="article-detail__content" [innerHTML]="sanitizedDescription"></div>
+    </div>
+  }
+</div>

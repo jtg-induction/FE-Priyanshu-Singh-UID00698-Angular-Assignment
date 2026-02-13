@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '@core/services/auth.service';
+import { AuthService } from '@core/services/authService/auth.service';
+import { NotificationService } from '@core/services/notificationService/notification.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,13 +12,15 @@ import { AuthService } from '@core/services/auth.service';
 export class NavbarComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
-
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/auth/login']);
-  }
+  private notification = inject(NotificationService);
 
   redirectToHome(): void {
     this.router.navigate(['/']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.redirectToHome();
+    this.notification.success('Logout Successfull');
   }
 }

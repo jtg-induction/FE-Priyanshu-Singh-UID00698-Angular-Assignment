@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '@core/services/auth.service';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+
+import { AuthService } from '@core/services/authService/auth.service';
+
 import { authGuard } from './auth.guard';
 
 describe('authGuard', () => {
@@ -11,7 +13,7 @@ describe('authGuard', () => {
 
   beforeEach(() => {
     authService = jasmine.createSpyObj('AuthService', ['isAuthenticated']);
-    router = jasmine.createSpyObj('Router', ['navigateByUrl']);
+    router = jasmine.createSpyObj('Router', ['createUrlTree']);
 
     TestBed.configureTestingModule({
       providers: [
@@ -23,19 +25,25 @@ describe('authGuard', () => {
 
   it('should allow navigation if authenticated', () => {
     authService.isAuthenticated.and.returnValue(true);
+
     const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+
     expect(result).toBeTrue();
-    expect(router.navigateByUrl).not.toHaveBeenCalled();
   });
 
-  it('should redirect to login if not authenticated', () => {
+  it('should return UrlTree to /login if not authenticated', () => {
+    const mockUrlTree = {} as UrlTree;
     authService.isAuthenticated.and.returnValue(false);
-    TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+    router.createUrlTree.and.returnValue(mockUrlTree);
+
+    const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+
     expect(authService.isAuthenticated).toHaveBeenCalled();
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/auth/login');
+    expect(router.createUrlTree).toHaveBeenCalledWith(['/login']);
+    expect(result).toBe(mockUrlTree);
   });
 
   it('should be created', () => {
-    expect(authService).toBeTruthy();
+    expect(authGuard).toBeTruthy();
   });
 });

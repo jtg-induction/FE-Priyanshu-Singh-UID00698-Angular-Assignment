@@ -1,24 +1,32 @@
-<mat-card class="article-card">
+<mat-card class="article-card" (click)="openArticleDetialsPage()">
   <div class="article-card__image">
     <img [src]="article.image" [alt]="article.title" />
   </div>
 
   <mat-card-content class="article-card__content">
-    <h3 class="article-card__title">
-      {{ article.title }}
-    </h3>
+    <div>
+      <h3 class="article-card__title">
+        {{ article.title }}
+      </h3>
 
-    <p class="article-card__description">{{ article.shortDescription }}</p>
-
-    <div class="article-card__info">
-      <span>By: {{ article.author }}</span>
-      <span class="separator">&#8226;</span>
-      <span>{{ article.createdAt | date: 'mediumDate' }}</span>
+      <p class="article-card__description">{{ article.shortDescription }}</p>
     </div>
-    <div class="article-card__tags">
-      @for (tag of article.tags; track $index) {
-        <span class="tag">{{ tag }}</span>
-      }
+
+    <div>
+      <div class="article-card__info">
+        <span>By: {{ article.author }}</span>
+        <span class="separator">&#8226;</span>
+        <span>{{ article.createdAt | date: 'mediumDate' }}</span>
+      </div>
+
+      <div class="article-card__tags">
+        @for (tag of visibleTags; track $index) {
+          <span class="tag">{{ tag }}</span>
+        }
+        @if (remainingTagCount > 0) {
+          <span class="tag"> +{{ remainingTagCount }} </span>
+        }
+      </div>
     </div>
   </mat-card-content>
 </mat-card>

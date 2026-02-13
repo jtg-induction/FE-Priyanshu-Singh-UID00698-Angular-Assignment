@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
 import { AuthResponse } from '@core/models/auth.model';
-import { AuthService } from '@core/services/auth.service';
-import { NotificationService } from '@core/services/notification.service';
+import { AuthService } from '@core/services/authService/auth.service';
+import { NotificationService } from '@core/services/notificationService/notification.service';
+
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {

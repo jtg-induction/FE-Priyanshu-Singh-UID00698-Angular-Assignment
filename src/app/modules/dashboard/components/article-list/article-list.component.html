@@ -1,19 +1,13 @@
 <div class="article-list">
-  @if (loading) {
-    <div class="article-list__loader">
-      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  @if (articles.length === 0) {
+    <div class="article-list__empty">
+      <p class="article-list__empty-text">No articles found</p>
     </div>
   } @else {
-    @if (articles.length === 0) {
-      <div class="article-list__empty">
-        <p class="article-list__empty-text">No articles found</p>
-      </div>
-    } @else {
-      <div class="article-list__grid">
-        @for (article of articles; track article.id) {
-          <app-article-card [article]="article"></app-article-card>
-        }
-      </div>
-    }
+    <div class="article-list__grid">
+      @for (article of articles; track article.id) {
+        <app-article-card [article]="article"></app-article-card>
+      }
+    </div>
   }
 </div>

@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { SignUpRequest } from '@core/models/auth.model';
-import { AuthService } from '@core/services/auth.service';
-import { NotificationService } from '@core/services/notification.service';
+import { AuthService } from '@core/services/authService/auth.service';
+import { NotificationService } from '@core/services/notificationService/notification.service';
 import { confirmPasswordValidator, passwordValidator } from '@shared/validators/password.validator';
 
 @Component({
@@ -26,7 +26,7 @@ export class SignupComponent {
   constructor() {
     this.signupForm = this.fb.group(
       {
-        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, passwordValidator]],
         confirmPassword: ['', [Validators.required]],
@@ -56,18 +56,13 @@ export class SignupComponent {
     };
 
     this.authService.signup(payload).subscribe({
-      next: (response) => {
-        setTimeout(() => {
-          console.log('Second line runs after a 2-second delay.');
-        }, 2000);
+      next: () => {
         this.isLoading = false;
-        console.log('Signup successful:', response);
         this.notificationService.success('Account created successfully!');
-        this.router.navigate(['/']);
+        this.router.navigate(['/articles']);
       },
-      error: (error) => {
+      error: () => {
         this.isLoading = false;
-        console.error('Signup failed:', error);
       },
     });
   }

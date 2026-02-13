@@ -9,23 +9,25 @@ import { DashboardLayoutComponent } from '@modules/dashboard/dashboard-layout/da
 import { authGuard } from '@core/guards/auth.guard';
 import { guestGuard } from '@core/guards/guest.guard';
 
+import { ErrorComponent } from '@core/pages/error/error.component';
 import { NotFoundComponent } from '@core/pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: '',
     component: AuthLayoutComponent,
     canActivate: [guestGuard],
     loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: '',
+    path: 'articles',
     component: DashboardLayoutComponent,
     canActivate: [authGuard],
     loadChildren: () =>
       import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
-  { path: '**', component: NotFoundComponent },
+  { path: 'error', component: ErrorComponent, title: 'DevAlgo | Error' },
+  { path: '**', component: NotFoundComponent, title: 'DevAlgo | Not Found' },
 ];
 
 @NgModule({

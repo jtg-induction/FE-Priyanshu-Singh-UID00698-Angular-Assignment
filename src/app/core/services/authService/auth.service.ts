@@ -5,8 +5,8 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 import { ACCESS_TOKEN_KEY, USER_KEY } from '@shared/constants/general.constants';
 
-import { AuthResponse, LoginRequest, SignUpRequest } from '../models/auth.model';
-import { User } from '../models/user.model';
+import { AuthResponse, LoginRequest, SignUpRequest } from '../../models/auth.model';
+import { User } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root',

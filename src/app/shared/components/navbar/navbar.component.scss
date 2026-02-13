@@ -1,38 +1,44 @@
 @use 'abstracts' as *;
 
 .navbar {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: fit-content;
   display: flex;
   align-items: center;
-  padding: 0 px_to_rem(16);
+  padding: 0 px-to-rem(16);
   justify-content: space-between;
 
   &__left {
     display: flex;
     align-items: center;
-    gap: px_to_8rem();
+    gap: px_to_rem(8);
     cursor: pointer;
   }
 
   &__logo {
-    height: px_to_rem(48);
-    width: px_to_rem(48);
+    height: px-to-rem(48);
+    width: px-to-rem(48);
     object-fit: contain;
   }
 
   &__title {
-    font-size: px_to_rem(48);
+    font-size: px-to-rem(48);
     font-weight: 600;
   }
 
   &__right {
     display: flex;
     align-items: center;
-    gap: px_to_rem(12);
+    gap: px-to-rem(12);
   }
 
   &__avatar {
-    height: px_to_rem(32);
-    width: px_to_rem(32);
+    height: px-to-rem(32);
+    width: px-to-rem(32);
     border-radius: 50%;
     object-fit: cover;
   }

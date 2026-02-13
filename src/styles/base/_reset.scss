@@ -4,16 +4,9 @@
   box-sizing: border-box;
 }
 
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-blockquote,
-dl,
-dd {
+html,
+body {
+  height: 100%;
   margin: 0;
 }
 
@@ -27,8 +20,7 @@ select {
 img,
 picture,
 video,
-canvas,
-svg {
+canvas {
   display: block;
   max-width: 100%;
 }

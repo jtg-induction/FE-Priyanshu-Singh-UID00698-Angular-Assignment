@@ -9,5 +9,4 @@ import { Article } from '@core/models/article.model';
 })
 export class ArticleListComponent {
   @Input() articles: Article[] = [];
-  @Input() loading = false;
 }

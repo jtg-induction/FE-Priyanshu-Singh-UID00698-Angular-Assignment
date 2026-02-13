@@ -1,5 +1,5 @@
 <mat-sidenav-container class="dashboard-layout">
-  <mat-sidenav #filterDrawer mode="over" position="end">
+  <mat-sidenav #filterDrawer mode="over" position="end" class="drawer">
     <app-filter-drawer
       [tags]="selectedTags"
       [sortBy]="sortBy"
@@ -25,7 +25,7 @@
       </div>
 
       <div class="dashboard-layout__body">
-        <app-article-list [articles]="articles" [loading]="isArticleLoading" />
+        <app-article-list [articles]="articles" />
       </div>
 
       <div class="dashboard-layout__footer">

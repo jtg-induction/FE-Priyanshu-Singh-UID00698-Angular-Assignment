@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { LoginRequest } from '@core/models/auth.model';
-import { AuthService } from '@core/services/auth.service';
-import { NotificationService } from '@core/services/notification.service';
+import { AuthService } from '@core/services/authService/auth.service';
+import { NotificationService } from '@core/services/notificationService/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -48,13 +48,10 @@ export class LoginComponent {
     };
 
     this.authService.login(payload).subscribe({
-      next: (value) => {
-        setTimeout(() => {
-          this.isLoading = false;
-          console.log('Login successful', value);
-          this.notificationService.success('Login successful!');
-          this.router.navigate(['/']);
-        }, 2000);
+      next: () => {
+        this.isLoading = false;
+        this.notificationService.success('Login successful!');
+        this.router.navigate(['/articles']);
       },
       error: () => {
         this.isLoading = false;
