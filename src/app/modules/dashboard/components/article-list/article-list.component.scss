@@ -1,0 +1,35 @@
+@use 'abstracts' as *;
+
+.article-list {
+  height: 100%;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(px_to_rem(350), 1fr));
+    gap: px_to_rem(16);
+    place-content: start start;
+  }
+
+  &__loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: px_to_rem(40);
+  }
+
+  &__empty {
+    text-align: center;
+    padding: px_to_rem(40);
+  }
+
+  &__empty-text {
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  @media (width <= 600) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

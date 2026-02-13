@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '@environments/environment';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-
-import { environment } from '@environments/environment.development';
 
 import { ACCESS_TOKEN_KEY, USER_KEY } from '@shared/constants/general.constants';
 

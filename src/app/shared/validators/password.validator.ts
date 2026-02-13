@@ -2,6 +2,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export function passwordValidator(control: AbstractControl): ValidationErrors | null {
   const value: string = control.value;
+
   if (!value) return null;
 
   const hasMinLength = value.length >= 8;
@@ -14,15 +15,15 @@ export const confirmPasswordValidator = (group: AbstractControl): ValidationErro
   const passwordCtrl = group.get('password');
   const confirmCtrl = group.get('confirmPassword');
 
+  // console.log(passwordCtrl, confirmCtrl);
+
   if (!passwordCtrl || !confirmCtrl) return null;
 
   if (!passwordCtrl.value || !confirmCtrl.value) return null;
 
+  console.log(confirmCtrl);
   if (passwordCtrl.value !== confirmCtrl.value) {
-    confirmCtrl.setErrors({
-      ...(confirmCtrl.errors || {}),
-      passwordMismatch: true,
-    });
+    confirmCtrl.setErrors({ ...(confirmCtrl.errors || {}), passwordMismatch: true });
     return { passwordMismatch: true };
   }
 

@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { LoginRequest } from '@core/models/auth.model';
 import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
 
@@ -40,11 +42,19 @@ export class LoginComponent {
 
     this.isLoading = true;
 
-    this.authService.login(this.loginForm.value).subscribe({
+    const payload: LoginRequest = {
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password,
+    };
+
+    this.authService.login(payload).subscribe({
       next: (value) => {
-        this.isLoading = false;
-        console.log('Login successful', value);
-        this.notificationService.success('Login successful!');
+        setTimeout(() => {
+          this.isLoading = false;
+          console.log('Login successful', value);
+          this.notificationService.success('Login successful!');
+          this.router.navigate(['/']);
+        }, 2000);
       },
       error: () => {
         this.isLoading = false;

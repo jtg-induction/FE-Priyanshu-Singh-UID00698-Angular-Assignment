@@ -7,8 +7,8 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 export class NotificationService {
   private readonly defaultConfig: MatSnackBarConfig = {
     duration: 3000,
-    horizontalPosition: 'right',
-    verticalPosition: 'top',
+    horizontalPosition: 'left',
+    verticalPosition: 'bottom',
   };
 
   private snackBar = inject(MatSnackBar);

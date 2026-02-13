@@ -1,0 +1,43 @@
+<mat-sidenav-container class="dashboard-layout">
+  <mat-sidenav #filterDrawer mode="over" position="end">
+    <app-filter-drawer
+      [tags]="selectedTags"
+      [sortBy]="sortBy"
+      [sortOrder]="sortOrder"
+      (apply)="applyFilters($event)"
+      (clear)="clearFilters()"
+      (closed)="filterDrawer.close()"
+    />
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="dashboard-layout__content">
+      <div class="dashboard-layout__header">
+        <div class="dashboard-layout__search">
+          <app-search-bar
+            label="Articles"
+            placeholder="Search articles..."
+            (searchChange)="onSearchChange($event)"
+          />
+        </div>
+
+        <app-button label="Filter" icon="filter_list" (clicked)="filterDrawer.open()" />
+      </div>
+
+      <div class="dashboard-layout__body">
+        <app-article-list [articles]="articles" [loading]="isArticleLoading" />
+      </div>
+
+      <div class="dashboard-layout__footer">
+        <mat-paginator
+          class="paginator"
+          (page)="handlePageEvent($event)"
+          [length]="length"
+          [pageSize]="pageSize"
+          [pageIndex]="pageIndex"
+          [pageSizeOptions]="[6, 12, 18, 36]"
+        />
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

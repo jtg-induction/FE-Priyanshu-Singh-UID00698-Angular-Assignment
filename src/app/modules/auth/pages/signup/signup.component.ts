@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { SignUpRequest } from '@core/models/auth.model';
 import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
@@ -56,6 +57,9 @@ export class SignupComponent {
 
     this.authService.signup(payload).subscribe({
       next: (response) => {
+        setTimeout(() => {
+          console.log('Second line runs after a 2-second delay.');
+        }, 2000);
         this.isLoading = false;
         console.log('Signup successful:', response);
         this.notificationService.success('Account created successfully!');

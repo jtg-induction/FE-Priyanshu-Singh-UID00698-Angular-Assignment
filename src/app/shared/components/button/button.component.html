@@ -7,15 +7,13 @@
   (click)="onClick()"
 >
   @if (!loading) {
-    <span>
+    <span class="button__content">
       @if (icon) {
-        <mat-icon class="btn-icon">{{ icon }}</mat-icon>
+        <mat-icon class="">{{ icon }}</mat-icon>
       }
       {{ label }}
     </span>
-  }
-
-  @if (loading) {
-    <mat-spinner [diameter]="spinnerSize"> </mat-spinner>
+  } @else {
+    <mat-spinner [diameter]="spinnerSize" />
   }
 </button>
