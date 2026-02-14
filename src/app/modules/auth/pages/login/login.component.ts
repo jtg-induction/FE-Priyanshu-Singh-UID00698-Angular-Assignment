@@ -1,6 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { Subject, takeUntil } from 'rxjs';
 
 import { LoginRequest } from '@core/models/auth.model';
 import { AuthService } from '@core/services/authService/auth.service';
@@ -11,18 +13,19 @@ import { NotificationService } from '@core/services/notificationService/notifica
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss', '../signup/signup.component.scss'],
 })
-export class LoginComponent {
-  private fb = inject(FormBuilder);
+export class LoginComponent implements OnDestroy {
+  private formBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
   private notificationService = inject(NotificationService);
+  private destroy$ = new Subject<void>();
 
   loginForm: FormGroup;
   isLoading = false;
   hidePassword = true;
 
   constructor() {
-    this.loginForm = this.fb.group({
+    this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required]],
     });
@@ -47,19 +50,26 @@ export class LoginComponent {
       password: this.loginForm.value.password,
     };
 
-    this.authService.login(payload).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.notificationService.success('Login successful!');
-        this.router.navigate(['/articles']);
-      },
-      error: () => {
-        this.isLoading = false;
-      },
-    });
+    this.authService
+      .login(payload)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['/articles']);
+        },
+        error: () => {
+          this.isLoading = false;
+        },
+      });
   }
 
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

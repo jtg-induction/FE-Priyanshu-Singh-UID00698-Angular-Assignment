@@ -17,6 +17,7 @@
           <app-search-bar
             label="Articles"
             placeholder="Search articles..."
+            [searchValue]="currentSearch"
             (searchChange)="onSearchChange($event)"
           />
         </div>

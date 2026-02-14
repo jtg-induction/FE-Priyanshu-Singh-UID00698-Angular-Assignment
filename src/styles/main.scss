@@ -1,18 +1,2 @@
 @use 'abstracts';
 @use 'base';
-@use 'components';
-
-@use '@angular/material' as mat;
-@use 'theme/default' as theme;
-
-:root {
-  --color-primary: #{mat.get-color-from-palette(theme.$primary-palette)};
-  --color-primary-hover: #{mat.get-color-from-palette(theme.$primary-palette, 600)};
-  --color-accent: #{mat.get-color-from-palette(theme.$accent-palette)};
-  --color-warn: #{mat.get-color-from-palette(theme.$warn-palette, 600)};
-  --color-bg-page: #{mat.get-color-from-palette(theme.$primary-palette, 50)};
-  --color-bg-card: #fff;
-  --color-text-heading: #1f2937;
-  --color-text-body: #6b7280;
-  --color-border: #e5e7eb;
-}

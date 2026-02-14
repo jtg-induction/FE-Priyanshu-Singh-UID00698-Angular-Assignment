@@ -1,6 +1,7 @@
 <mat-form-field appearance="outline" class="full-width">
   <mat-label>{{ label }}</mat-label>
   <input matInput [type]="inputType" [placeholder]="placeholder" [formControl]="control" />
+
   @if (icon) {
     <mat-icon matPrefix>{{ icon }}</mat-icon>
   }
@@ -12,6 +13,6 @@
   }
 
   @if (control.invalid && (control.touched || control.dirty)) {
-    <mat-error class="error">{{ control.errors | validationError }}</mat-error>
+    <mat-error class="error">{{ debouncedErrors$ | async | validationError }}</mat-error>
   }
 </mat-form-field>

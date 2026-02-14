@@ -8,6 +8,7 @@ import { ERROR_MESSAGES } from '@shared/constants/error.constants';
 export class GlobalError implements ErrorHandler {
   private notificationService = inject(NotificationService);
   private router = inject(Router);
+
   handleError(error: unknown): void {
     if (error instanceof HttpErrorResponse) return;
     this.notificationService.error(ERROR_MESSAGES.GENERIC_ERROR);

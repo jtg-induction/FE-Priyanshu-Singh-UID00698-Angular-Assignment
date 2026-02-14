@@ -23,7 +23,7 @@
   &__description {
     font-size: px-to-rem(48);
     font-weight: 700;
-    color: var(--color-text-heading);
+    color: $color-text-heading;
     margin-bottom: px-to-rem(32);
     line-height: 1.6;
   }
