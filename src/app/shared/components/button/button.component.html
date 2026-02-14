@@ -4,7 +4,7 @@
   [type]="type"
   class="button"
   [disabled]="disabled || loading"
-  (click)="onClick()"
+  (click)="disabled || loading || onClick()"
 >
   @if (!loading) {
     <span class="button__content">
