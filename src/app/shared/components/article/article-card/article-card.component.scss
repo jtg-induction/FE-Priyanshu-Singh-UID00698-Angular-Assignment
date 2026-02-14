@@ -38,7 +38,7 @@
     font-size: px-to-rem(16);
     font-weight: 600;
     margin-bottom: px-to-rem(16);
-    color: var(--color-text-heading);
+    color: $color-text-heading;
   }
 
   &__description {
@@ -68,7 +68,7 @@
     .tag {
       padding: px-to-rem(4) px-to-rem(8);
       font-size: px-to-rem(12);
-      background: var(--color-primary);
+      background: $color-primary;
       color: white;
       border-radius: px-to-rem(8);
       font-weight: 500;

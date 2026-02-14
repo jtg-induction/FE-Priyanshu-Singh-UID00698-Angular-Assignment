@@ -1,0 +1,20 @@
+.snackbar {
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__success {
+    background-color: green;
+    color: white;
+  }
+
+  &__error {
+    background-color: red;
+    color: white;
+  }
+
+  &__message {
+    flex: 1;
+  }
+}

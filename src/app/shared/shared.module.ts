@@ -18,6 +18,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { ValidationErrorPipe } from './pipe/validation-error.pipe';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ValidationErrorPipe } from './pipe/validation-error.pipe';
     ArticleCardComponent,
     SearchBarComponent,
     NavbarComponent,
+    SnackbarComponent,
   ],
 
   imports: [
@@ -57,6 +59,7 @@ import { ValidationErrorPipe } from './pipe/validation-error.pipe';
     ArticleCardComponent,
     SearchBarComponent,
     NavbarComponent,
+    SnackbarComponent,
   ],
 })
 export class SharedModule {}

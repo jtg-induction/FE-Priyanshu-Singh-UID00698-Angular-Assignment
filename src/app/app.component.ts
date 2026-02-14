@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   NavigationCancel,
   NavigationEnd,
@@ -7,6 +7,8 @@ import {
   Router,
 } from '@angular/router';
 
+import { Subject, takeUntil } from 'rxjs';
+
 import { LoadingService } from '@core/services/loadingService/loading.service';
 
 @Component({
@@ -14,12 +16,13 @@ import { LoadingService } from '@core/services/loadingService/loading.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   private loadingService = inject(LoadingService);
   private router = inject(Router);
+  private destroy$ = new Subject<void>();
   title = 'DevAlgo';
   ngOnInit(): void {
-    this.router.events.subscribe((event) => {
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
       if (event instanceof NavigationStart) this.loadingService.show();
 
       if (
@@ -33,5 +36,10 @@ export class AppComponent implements OnInit {
         }
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

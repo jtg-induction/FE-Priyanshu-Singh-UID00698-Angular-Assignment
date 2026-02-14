@@ -1,16 +1,16 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ArticleService } from '@modules/dashboard/services/article.service';
 
-import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
-
 import { HttpParams } from '@angular/common/http';
 
 import { MatSidenav } from '@angular/material/sidenav';
+
+import { Subject, takeUntil } from 'rxjs';
 
 import { Article } from '@core/models/article.model';
 import { DashBoardFilter, sortByType, sortOrderType } from '@core/models/dashboard-filter.model';
@@ -21,7 +21,7 @@ import { NotificationService } from '@core/services/notificationService/notifica
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   readonly separatorKeysCodes = [ENTER, COMMA];
   @ViewChild('filterDrawer') filterDrawer!: MatSidenav;
 
@@ -42,22 +42,14 @@ export class HomeComponent implements OnInit {
   private snackbar = inject(NotificationService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
-  private search$ = new Subject<string>();
+  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.search$.pipe(debounceTime(300), distinctUntilChanged()).subscribe((search) => {
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: {
-          search: search || '',
-          page: 0,
-          pageSize: 6,
-        },
-        queryParamsHandling: 'merge',
-      });
-    });
+    this.loadArticlesFromParams();
+  }
 
-    this.route.queryParams.subscribe((params) => {
+  loadArticlesFromParams(): void {
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       const urlPage = +params['page'] || 1;
       this.pageIndex = Math.max(0, urlPage - 1);
       this.pageSize = +params['pageSize'] || 6;
@@ -68,7 +60,6 @@ export class HomeComponent implements OnInit {
       this.loadArticles();
     });
   }
-
   handlePageEvent(e: PageEvent) {
     this.router.navigate([], {
       relativeTo: this.route,
@@ -81,7 +72,15 @@ export class HomeComponent implements OnInit {
   }
 
   onSearchChange(search: string): void {
-    this.search$.next(search);
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        search: search || '',
+        page: 1,
+        pageSize: this.pageSize,
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 
   addTag(event: MatChipInputEvent): void {
@@ -142,15 +141,24 @@ export class HomeComponent implements OnInit {
   loadArticles(): void {
     const param = this.buildParams();
 
-    this.articleService.getArticles(param).subscribe({
-      next: (response) => {
-        this.articles = response.data.data;
-        this.pageSize = response.data.pageSize;
-        this.length = response.data.totalItems;
-      },
-      error: () => {
-        this.snackbar.error('Failed to fetch articles');
-      },
-    });
+    this.articleService
+      .getArticles(param)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          this.articles = response.data.data;
+          this.pageSize = response.data.pageSize;
+          this.length = response.data.totalItems;
+          this.snackbar.success('Articles fetched');
+        },
+        error: () => {
+          this.snackbar.error('Failed to fetch articles');
+        },
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -5,10 +5,12 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
 import { ApiError } from '@core/models/api-response.model';
+import { AuthService } from '@core/services/authService/auth.service';
 import { NotificationService } from '@core/services/notificationService/notification.service';
 import { ERROR_MESSAGES, SERVER_ERROR_CODES } from '@shared/constants/error.constants';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
+  const authService = inject(AuthService);
   const notificationService = inject(NotificationService);
   const router = inject(Router);
 
@@ -22,6 +24,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       }
 
       if (error.status === 401) {
+        authService.logout();
         const currentUrl = router.url;
         notificationService.error(message);
 
