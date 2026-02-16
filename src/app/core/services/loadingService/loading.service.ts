@@ -9,8 +9,8 @@ export class LoadingService {
   private spinner = inject(NgxSpinnerService);
 
   show() {
+    if (this.requestCount === 0) this.spinner.show();
     this.requestCount++;
-    this.spinner.show();
   }
 
   hide() {

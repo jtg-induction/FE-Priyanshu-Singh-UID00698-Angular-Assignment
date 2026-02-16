@@ -6,11 +6,11 @@ import { AuthLayoutComponent } from '@modules/auth/auth-layout/auth-layout.compo
 
 import { DashboardLayoutComponent } from '@modules/dashboard/dashboard-layout/dashboard-layout.component';
 
-import { authGuard } from '@core/guards/auth.guard';
-import { guestGuard } from '@core/guards/guest.guard';
+import { authGuard } from '@core/guards/authGuard/auth.guard';
+import { guestGuard } from '@core/guards/guestGuard/guest.guard';
 
-import { ErrorComponent } from '@core/pages/error/error.component';
-import { NotFoundComponent } from '@core/pages/not-found/not-found.component';
+import { ErrorComponent } from '@shared/components/error/error.component';
+import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 
 const routes: Routes = [
   {

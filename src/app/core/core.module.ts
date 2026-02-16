@@ -5,11 +5,12 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 
 import { GlobalError } from './handlers/global-error.handler';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { errorInterceptor } from './interceptors/error.interceptor';
-import { loadingInterceptor } from './interceptors/loading.interceptor';
-import { ErrorComponent } from './pages/error/error.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AuthInterceptor } from './interceptors/authInterceptor/auth.interceptor';
+import { errorInterceptor } from './interceptors/errorInterceptor/error.interceptor';
+import { loadingInterceptor } from './interceptors/loadingInterceptor/loading.interceptor';
+
+import { ErrorComponent } from '../shared/components/error/error.component';
+import { NotFoundComponent } from '../shared/components/not-found/not-found.component';
 
 @NgModule({
   declarations: [NotFoundComponent, ErrorComponent],
